@@ -1,0 +1,18 @@
+{
+    "name": "newuser/social-globe",
+    "description": "SocialGlobe",
+    "autoload": {
+        "psr-4": {
+            "Newuser\\SocialGlobe\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ignacio Giampaoli",
+            "email": "colo92@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
