@@ -2,13 +2,17 @@
 require_once __DIR__ . '/../models/Post.php';
 
 class PostController {
-    public static function createPost($userId, $content) {
-        $post = new Post();
-        return $post->createPost($userId, $content);
+    private $post;
+
+    public function __construct(Post $post) {
+        $this->post = $post;
     }
 
-    public static function getUserPosts($userId) {
-        $post = new Post();
-        return $post->getUserPosts($userId);
+    public function createPost($userId, $content) {
+        return $this->post->createPost($userId, $content);
+    }
+
+    public function getUserPosts($userId) {
+        return $this->post->getUserPosts($userId);
     }
 }
