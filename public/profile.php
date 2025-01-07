@@ -12,12 +12,18 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 
+$postModel = new Post();
+$postController = new PostController($postModel);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $_POST['content'];
-    PostController::createPost($userId, $content);
+    $postController->createPost($userId, $content);
 }
 
-$posts = PostController::getUserPosts($userId);
+$postModel = new Post();
+$postController = new PostController($postModel);
+$posts = $postController->getUserPosts($userId);
+//$posts = PostController::getUserPosts($userId);
 ?>
 
 <h1><?php echo ucfirst($username); ?> Posts</h1>

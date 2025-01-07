@@ -15,7 +15,19 @@ class Post {
 
     public function getUserPosts($userId) {
         $stmt = $this->db->prepare("SELECT * FROM posts WHERE user_id = :user_id ORDER BY created_at DESC");
-        $stmt->execute(['user_id' => $userId]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //$stmt->execute(['user_id' => $userId]);
+        //return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Check if execution is successful
+        if ($stmt->execute(['user_id' => $userId])) {
+            // Fetch results only if execution succeeds
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            //var_dump($results); // View fetched data
+            return $results;
+        } else {
+            // Handle errors
+            $errorInfo = $stmt->errorInfo(); // Returns an array with error details
+            throw new Exception('Query failed: ' . implode(' ', $errorInfo));
+        }
     }
 }
